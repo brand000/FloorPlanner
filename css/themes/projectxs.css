@@ -1,0 +1,31 @@
+/* jQuery Mobile classes              */
+/* Background colour                  */
+.ui-page,
+.ui-header {
+  background: #cedbce !important;
+}
+
+/* hide default slider text box      */
+.ui-slider-input {
+  display: none !important;
+}
+
+/* remove if irrelavant */
+/* user defined id's                 */
+#planSldOutDiv,
+#windowSldOutDiv {
+  width: 50px;
+}
+
+
+/* remove if irrelavant */
+#plan{
+  background-color: white;
+  margin-right: 300px;
+}
+/* remove if irrelavant */
+#frontview {
+  background-color: white; 
+}
+
+
