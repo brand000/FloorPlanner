@@ -10,6 +10,15 @@
   display: none !important;
 }
 
+/* select elements */
+.ui-select {
+  width: 450px;
+}
+
+.ui-input-text {
+  width: 50px;
+}
+
 /* remove if irrelavant */
 /* user defined id's                 */
 #planSldOutDiv,
@@ -17,15 +26,12 @@
   width: 50px;
 }
 
-
 /* remove if irrelavant */
-#plan{
+#plan {
   background-color: white;
   margin-right: 300px;
 }
 /* remove if irrelavant */
 #frontview {
-  background-color: white; 
+  background-color: white;
 }
-
-

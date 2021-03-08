@@ -13,112 +13,127 @@
         <script src="scripts/projectXS.js"></script>
     </head>
     <body onload="setup()">
-        <div role="main" class="ui-content">
-            <div id="inputs">
-                <div class="ui-grid-c ui-responsive">
-                    <div class="ui-block-a">
-                        <canvas id="logo" width="200" height="200"></canvas>
-                    </div>
-                    <div class="ui-block-b ui-responsive">
-                        <div>
-                                <img src="image/shipCrate.jpg">
+        <div data-role="page">
+            <div class="ui-content">
+                <div id="inputs">
+                    <div class="ui-grid-c ui-responsive">
+                        <div class="ui-block-a ui-responsive">
+                            <canvas id="logo" width="200" height="200"></canvas>
                         </div>
-                    </div>
-                    <div class="ui-block-c ui-responsive">
-                        <div>
-                            <br>
-                            <div data-role="controlgroup" data-type="horizontal">
-                                <select id="1namethis" onchange="Select()" data-theme="a">
-                                    <option value="create options">create options</option>
-                                    <option value="createoptions">create options</option>
-                                </select>
+                        <div class="ui-block-b ui-responsive">
+                            <div>
+                                    <img src="image/shipCrate.jpg">
                             </div>
                         </div>
-                    </div>
-                    <div class="ui-block-d ui-responsive">
-                        <br>
-                    </div>
-                
-                <div class="ui-grid-c ui-responsive">
-                    <div class="ui-block-a ui-responsive">
-                        <canvas id="plan" width="200" height="200"></canvas>
-                    </div>
-                    <div class="ui-block-b ui-responsive"></div>
-                    <div class="ui-block-c ui-responsive">
-                        <canvas id="frontview" width="200" height="200"></canvas>
-                    </div>
-                    <div class="ui-block-d ui-responsive"></div>
-                </div>
-
-
-                <div class="ui-grid-c ui-responsive">
-                    
-                    <div class="ui-block-a ui-responsive">
-                        <div>
-                            <br>
-                            <div data-role="controlgroup" data-type="horizontal">
-                                <select id="2namethis" onchange="Select()" data-theme="c">
-                                    <option value="create options">create options</option>
-                                    <option value="createoptions">create options</option>
-                                </select>
+                        <div class="ui-block-c ui-responsive">
+                            <div>
+                                <br>
+                                <div data-role="controlgroup" data-type="horizontal">
+                                    <select id="1namethis" onchange="Select()" data-theme="a">
+                                        <option value="VIEW CHAPTERS">VIEW CHAPTERS</option>
+                                        <option value="Ventilation and Drafts" disabled >Ventilation and Drafts</option>
+                                        <option value="Insulation">Insulation</option>
+                                        <option value="Size and Proportion" disabled >Size and Proportion</option>
+                                        <option value="Immediate Context" disabled >Immediate Context</option>
+                                        <option value="Construction Details" disabled >Construction Details</option>
+                                        <option value="Energy Sources" disabled >Energy Sources</option>
+                                        <option value="Refrigeration Cycle" disabled >Refrigeration Cycle</option>
+                                        <option value="Psychometrics" disabled >Psychometrics</option>
+                                        <option value="Environmental Impacts" disabled >Environmental Impacts</option>
+                                        <option value="Radiation and Glazing" disabled >Radiation and Glazing</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="ui-block-b ui-responsive">
-                        <div>
+                        <div class="ui-block-d ui-responsive">
                             <br>
-                            <div data-role="controlgroup" data-type="horizontal">
-                                <select id="3namethis" onchange="Select()" data-theme="c">
-                                    <option value="create options">create options</option>
-                                    <option value="createoptions">create options</option>
-                                </select>
-                            </div>
                         </div>
                     </div>
-                    <div class="ui-block-c ui-responsive">
-                        <input id="windowSld" type="range" value="0" min="0" max="48" ui-slider-input="false" data-highlight="true" data-theme="c" data-track-theme="c">
+                    <div class="ui-grid-c ui-responsive">
+                        <div class="ui-block-a ui-responsive">
+                            <canvas id="plan" width="200" height="200"></canvas>
+                        </div>
+                        <div class="ui-block-b ui-responsive"></div>
+                        <div class="ui-block-c ui-responsive">
+                            <canvas id="frontview" width="200" height="200"></canvas>
+                        </div>
+                        <div class="ui-block-d ui-responsive"></div>
+                    </div>
+    
+    
+                    <div class="ui-grid-c ui-responsive">
+                        
+                        <div class="ui-block-a ui-responsive">
+                            <div class="padding-center">
+                                <br>
+                                <div data-role="controlgroup" data-type="horizontal">
+                                    <select id="2namethis" onchange="Select()" data-theme="c">
+                                        <option value="0">PLACES WITH DEGREE-DAYS</option>
+                                        <option value="1">NV Alert - 13030</option>
+                                        <option value="2">NV Iqaluit - 9980</option>
+                                        <option value="3">NV Resolution Island - 9000</option>
+                                        <option value="4">NW Yellowknife - 8170</option>
+                                        <option value="5">ON Attawapiskat - 7100</option>
+                                        <option value="6">MB FlinFlon - 6440</option>
+                                        <option value="7">QC Noranda - 6050</option>
+                                        <option value="8">MB Winnipeg - 5670</option>
+                                        <option value="9">NB Campbellton - 5500</option>
+                                        <option value="10">AL Calgary - 5000</option>
+                                        <option value="11">NL Saint Johns - 4800</option>
+                                        <option value="12">NB Fredericton - 4670</option>
+                                        <option value="13">ON Ottawa - 4520</option>
+                                        <option value="14">PE Charlottetown - 4460</option>
+                                        <option value="15">QC Montreal Centre - 4300</option>
+                                        <option value="16">NS Halifax - 4000</option>
+                                        <option value="17">ON Toronto CH - 3500</option>
+                                        <option value="18">ON Windsor - 3400</option>
+                                        <option value="19">BC Nanaimo - 3000</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ui-block-b ui-responsive">
+                            <div class="padding-center">
+                                <br>
+                                <div data-role="controlgroup" data-type="horizontal">
+                                    <select id="3namethis" onchange="Select()" data-theme="c">
+                                        <option value="0">OPAQUE CONSTRUCTION WITH R or R/INCH</option>
+                                        <option value="1">Bare Container (R1)</option>
+                                        <option value="2">Plus Interior Finish, Uninsulated (R2)</option>
+                                        <option value="3">Plus Finish and Cellulose (R3/in)</option>
+                                        <option value="4">Plus Finish and Fiberglass (R3/in)</option>
+                                        <option value="5">Plus Finish and Spray Foam (R6/in)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ui-block-c ui-responsive">
+                            <input id="windowSld" type="range" value="0" min="0" max="48" ui-slider-input="false" data-highlight="true" data-theme="c" data-track-theme="c">
+                                <div>
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <div id="windowSldOutDiv">
+                                                    <input id="windowSldOut" type="text">
+                                                </div>
+                                            </td>
+                                            <td>
+                                                ( " ) Opaque Thickness
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                        </div>
+                        <div class="ui-block-d ui-responsive"></div>
+                    </div>
+    
+                    <div class="ui-grid-c ui-responsive">
+                        <div class="ui-block-a ui-responsive">
                             <div>
                                 <table>
                                     <tr>
                                         <td>
-                                            <div id="windowSldOutDiv">
-                                                <input id="windowSldOut" type="text">
-                                            </div>
-                                        </td>
-                                        <td>
-                                            ( " ) Opaque Thickness
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                    </div>
-                    <div class="ui-block-d ui-responsive"></div>
-                </div>
-
-                <div class="ui-grid-c ui-responsive">
-                    <div class="ui-block-a ui-responsive">
-                        <div>
-                            <table>
-                                <tr>
-                                    <td>
-                                        <div id="OpaqueThermal">
-                                            <input id="windowSldOut" type="text">
-                                        </div>
-                                    </td>
-                                    <td>
-                                        ( K ) Opaque Thermal Resistance
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div> 
-                    <div class="ui-block-b ui-responsive">
-                        <input id="windowSld" type="range" value="0" min="0" max="48" ui-slider-input="false" data-highlight="true" data-theme="c" data-track-theme="c">
-                            <div>
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <div id="doorthaermal">
+                                            <div id="OpaqueThermal">
                                                 <input id="windowSldOut" type="text">
                                             </div>
                                         </td>
@@ -128,118 +143,143 @@
                                     </tr>
                                 </table>
                             </div>
-                    </div> 
-                    <div class="ui-block-c ui-responsive">
-                        <input id="windowSld" type="range" value="0" min="0" max="48" ui-slider-input="false" data-highlight="true" data-theme="c" data-track-theme="c">
-                            <div>
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <div id="windowthermal">
-                                                <input id="windowSldOut" type="text">
-                                            </div>
-                                        </td>
-                                        <td>
-                                            ( K ) Window Thermal Resistance
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
+                        </div> 
+                        <div class="ui-block-b ui-responsive">
+                            <input id="windowSld" type="range" value="0" min="0" max="48" ui-slider-input="false" data-highlight="true" data-theme="c" data-track-theme="c">
+                                <div>
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <div id="doorthaermal">
+                                                    <input id="windowSldOut" type="text">
+                                                </div>
+                                            </td>
+                                            <td>
+                                                ( K ) Opaque Thermal Resistance
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                        </div> 
+                        <div class="ui-block-c ui-responsive">
+                            <input id="windowSld" type="range" value="0" min="0" max="48" ui-slider-input="false" data-highlight="true" data-theme="c" data-track-theme="c">
+                                <div>
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <div id="windowthermal">
+                                                    <input id="windowSldOut" type="text">
+                                                </div>
+                                            </td>
+                                            <td>
+                                                ( K ) Window Thermal Resistance
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                        </div>
+                        </div> 
+                        <div class="ui-block-d ui-responsive"></div>
                     </div>
-                    </div> 
-                    <div class="ui-block-d ui-responsive"></div>
-                </div>
-
-                <div class="ui-grid-c ui-responsive">
-                    <div class="ui-block-a ui-responsive">
-                        <input id="windowSld" type="range" value="0" min="0" max="48" ui-slider-input="false" data-highlight="true" data-theme="c" data-track-theme="c">
+    
+                    <div class="ui-grid-c ui-responsive">
+                        <div class="ui-block-a ui-responsive">
+                            <input id="windowSld" type="range" value="0" min="0" max="48" ui-slider-input="false" data-highlight="true" data-theme="c" data-track-theme="c">
+                                <div>
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <div id="windowthermal">
+                                                    <input id="windowSldOut" type="text">
+                                                </div>
+                                            </td>
+                                            <td>
+                                                (SQ.FL) Window area
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                        </div> 
+                        <div class="ui-block-b ui-responsive">
                             <div>
                                 <table>
                                     <tr>
                                         <td>
-                                            <div id="windowthermal">
+                                            <div id="windowSl">
                                                 <input id="windowSldOut" type="text">
                                             </div>
                                         </td>
                                         <td>
-                                            (SQ.FL) Window area
+                                            ( R ) Effective Overall 
+                                                    Thermal Resistance 
                                         </td>
                                     </tr>
                                 </table>
                             </div>
-                    </div> 
-                    <div class="ui-block-b ui-responsive">
-                        <div>
-                            <table>
-                                <tr>
-                                    <td>
-                                        <div id="windowSl">
-                                            <input id="windowSldOut" type="text">
-                                        </div>
-                                    </td>
-                                    <td>
-                                        ( R ) Effective Overall 
-                                                Thermal Resistance 
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div> 
-                    <div class="ui-block-c ui-responsive">
-                        <div>
-                            <table>
-                                <tr>
-                                    <td>
-                                        <div id="effectivethermal">
-                                            <input id="windowSldOut" type="text">
-                                        </div>
-                                    </td>
-                                    <td>
-                                        ( kWh ) Annual
-                                                energy
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div> 
-                    <div class="ui-block-d ui-responsive"></div> 
-                </div>
-
-                <div class="ui-grid-c ui-responsive">
-                    <div class="ui-block-a ui-responsive">
-                        <div>
-                            <br>
-                            <div data-role="controlgroup" data-type="horizontal">
-                                <select id="4namethis" onchange="Select()" data-theme="a">
-                                    <option value="create options">create options</option>
-                                    <option value="createoptions">create options</option>
-                                </select>
+                        </div> 
+                        <div class="ui-block-c ui-responsive">
+                            <div>
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <div id="effectivethermal">
+                                                <input id="windowSldOut" type="text">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            ( kWh ) Annual
+                                                    energy
+                                        </td>
+                                    </tr>
+                                </table>
                             </div>
-                        </div>
-                    </div> 
-                    <div class="ui-block-b ui-responsive">
-                        <div>
-                            <br>
-                            <div data-role="controlgroup" data-type="horizontal">
-                                <select id="5amethis" onchange="Select()" data-theme="a">
-                                    <option value="create options">create options</option>
-                                    <option value="createoptions">create options</option>
-                                </select>
+                        </div> 
+                        <div class="ui-block-d ui-responsive"></div> 
+                    </div>
+    
+                    <div class="ui-grid-c ui-responsive">
+                        <div class="ui-block-a ui-responsive">
+                            <div>
+                                <br>
+                                <div data-role="controlgroup" data-type="horizontal">
+                                    <select id="4namethis" onchange="Select()" data-theme="a">
+                                        <option value="0">GRAPHS</option>
+                                        <option value="1">Graph 1</option>
+                                        <option value="2">Graph 2</option>
+                                    </select>
+                                </div>
                             </div>
-                        </div>
-                    </div> 
-                    <div class="ui-block-c ui-responsive">
-                        <div>
-                            <br>
-                            <div data-role="controlgroup" data-type="horizontal">
-                                <select id="6namethis" onchange="Select()" data-theme="a">
-                                    <option value="create options">create options</option>
-                                    <option value="createoptions">create options</option>
-                                </select>
+                        </div> 
+                        <div class="ui-block-b ui-responsive">
+                            <div>
+                                <br>
+                                <div data-role="controlgroup" data-type="horizontal">
+                                    <select id="5amethis" onchange="Select()" data-theme="a">
+                                        <option value="0">READOUTS</option>
+                                        <option value="1">Net to Gross Floor Area</option>
+                                        <option value="2">Energy Bill Per Net Floor Area</option>
+                                    </select>
+                                </div>
                             </div>
-                        </div>
-                    </div> 
-                    <div class="ui-block-d ui-responsive"></div> 
+                        </div> 
+                        <div class="ui-block-c ui-responsive">
+                            <div>
+                                <br>
+                                <div data-role="controlgroup" data-type="horizontal">
+                                    <select id="6namethis" onchange="Select()" data-theme="a">
+                                        <option value="0">CONCEPTS</option>
+                                        <option value="1">Local Conditions</option>
+                                        <option value="2">Annual Energy Budget</option>
+                                        <option value="3">Drafts and Ventilation</option>
+                                        <option value="4">Insulation and Heat Loss</option>
+                                        <option value="5">Materials and Insulation</option>
+                                        <option value="6">Environmental Impact</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div> 
+                        <div class="ui-block-d ui-responsive"></div> 
+                    </div>
                 </div>
             </div>
         </div>
