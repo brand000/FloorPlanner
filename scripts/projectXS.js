@@ -1,3 +1,6 @@
+// projectXS.js
+// LINKED to index.html
+
 function setup(){
     var c = document.getElementById("logo");
     var ctx = c.getContext("2d");

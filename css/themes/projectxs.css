@@ -1,3 +1,10 @@
+/* 
+projectxs.css
+LINKED to index.html
+*/
+
+/* HTML tags */
+
 /* jQuery Mobile classes              */
 /* Background colour                  */
 .ui-page,
@@ -10,16 +17,35 @@
   display: none !important;
 }
 
-/* select elements */
-.ui-select {
-  width: 450px;
+.ui-slider-track {
+  margin-left: 20px;
 }
 
-.ui-input-text {
+/* USER DEFINED CLASSES */
+
+/* resizes the text inputs */
+.input-text {
   width: 50px;
 }
 
-/* remove if irrelavant */
+/* resizex the text input for annual energy */
+.annual-energy-input {
+  width: 75px;
+}
+
+/* Centering elements */
+.slider-container,
+.text-input-container {
+  padding: 0 10px 0 40px;
+  margin: 0 auto;
+}
+
+/* Centering drop-down menus and putting spaces between them using padding */
+.drop-down-container {
+  margin: 0 auto;
+  padding: 0 10px;
+}
+
 /* user defined id's                 */
 #planSldOutDiv,
 #windowSldOutDiv {
