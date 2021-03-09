@@ -21,8 +21,8 @@
                             <canvas id="logo" width="200" height="200"></canvas>
                         </div>
                         <div class="ui-block-b ui-responsive">
-                            <div>
-                                    <img src="image/shipCrate.jpg">
+                            <div class="ship-crate">
+                                    <img src="image/shipCrate.jpg" width="260px" height="194px">
                             </div>
                         </div>
                         <div class="ui-block-c ui-responsive">
@@ -49,11 +49,15 @@
                     </div>
                     <div class="ui-grid-c ui-responsive">
                         <div class="ui-block-a ui-responsive">
-                            <canvas id="plan" width="200" height="200"></canvas>
+                            <div class="canvas">
+                                <canvas id="plan-view" width="321px" height="178px"></canvas>
+                            </div>
                         </div>
                         <div class="ui-block-b ui-responsive"></div>
                         <div class="ui-block-c ui-responsive">
-                            <canvas id="frontview" width="200" height="200"></canvas>
+                            <div class="canvas">
+                                <canvas id="elevation-view" width="321px" height="154px"></canvas>
+                            </div>
                         </div>
                         <div class="ui-block-d ui-responsive"></div>
                     </div>
@@ -63,7 +67,6 @@
                         
                         <div class="ui-block-a ui-responsive">
                             <div class="drop-down-container">
-                                <br>
                                 <select id="2namethis" onchange="Select()" data-theme="c">
                                     <option value="0">PLACES WITH DEGREE-DAYS</option>
                                     <option value="1">NV Alert - 13030</option>
@@ -90,7 +93,6 @@
                         </div>
                         <div class="ui-block-b ui-responsive">
                             <div class="drop-down-container">
-                                <br>
                                 <select id="3namethis" onchange="Select()" data-theme="c">
                                     <option value="0">OPAQUE CONSTRUCTION WITH R or R/INCH</option>
                                     <option value="1">Bare Container (R1)</option>
@@ -123,7 +125,7 @@
                         </div>
                         <div class="ui-block-d ui-responsive"></div>
                     </div>
-    
+                    <br>
                     <div class="ui-grid-c ui-responsive">
                         <div class="ui-block-a ui-responsive">
                             <div class="text-input-container">
@@ -144,7 +146,7 @@
                         <!-- Slider for Opaque Thermal Resistance -->
                         <div class="ui-block-b ui-responsive">
                             <div class="slider-container">
-                                <input id="windowSld" type="range" value="0" min="0" max="48" ui-slider-input="false" data-highlight="true" data-theme="c" data-track-theme="c">
+                                <input id="windowSld" type="range" value="1" min="1" max="14" ui-slider-input="false" data-highlight="true" data-theme="c" data-track-theme="c">
                             </div>
                             <div class="text-input-container">
                                 <table>
@@ -184,6 +186,7 @@
                         </div> 
                         <div class="ui-block-d ui-responsive"></div>
                     </div>
+                    <br>
                     <!-- Slider for Window Area -->
                     <div class="ui-grid-c ui-responsive">
                         <div class="ui-block-a ui-responsive">
@@ -248,8 +251,8 @@
                             <br>
                                 <select id="4namethis" onchange="Select()" data-theme="a">
                                     <option value="0">GRAPHS</option>
-                                    <option value="1">Graph 1</option>
-                                    <option value="2">Graph 2</option>
+                                    <option value="1" disabled>Graph 1</option>
+                                    <option value="2" disabled>Graph 2</option>
                                 </select>
                             </div>
                         </div> 
@@ -258,8 +261,8 @@
                                 <br>
                                 <select id="5amethis" onchange="Select()" data-theme="a">
                                     <option value="0">READOUTS</option>
-                                    <option value="1">Net to Gross Floor Area</option>
-                                    <option value="2">Energy Bill Per Net Floor Area</option>
+                                    <option value="1" disabled>Net to Gross Floor Area</option>
+                                    <option value="2" disabled>Energy Bill Per Net Floor Area</option>
                                 </select>
                             </div>
                         </div> 

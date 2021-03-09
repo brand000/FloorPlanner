@@ -4,7 +4,15 @@
 function setup(){
     var c = document.getElementById("logo");
     var ctx = c.getContext("2d");
+    const planViewObj = document.getElementById("plan-view");
+    const elevationViewObj = document.getElementById("elevation-view");
+
+    const planViewCon = planViewObj.getContext("2d");
+    const elevationViewCon = elevationViewObj.getContext("2d");
     
+    fillCanvas(planViewObj, planViewCon, "#D2CBCD");
+    fillCanvas(elevationViewObj, elevationViewCon, "#A3BCFD");
+
     var gradient = ctx.createLinearGradient(0, 0, 170, 0);
     gradient.addColorStop("0", "magenta");
     gradient.addColorStop("0.5" ,"blue");
@@ -16,10 +24,9 @@ function setup(){
     ctx.strokeRect(20, 20, 150, 100);
 }
 
-// function doBoxes(Obj, context){
-//    context.clearRect(0, 0, obj.width, obj.height);
-//    context.beginPath();
-//   context.rect(0, 0, 600, 400);
-//   context.stroke();
-
-// }
+function fillCanvas(obj, context, color){
+    context.clearRect(0, 0, obj.width, obj.height);
+    context.beginPath();
+    context.fillStyle = color;
+    context.fillRect(0, 0, obj.width, obj.height);
+}
