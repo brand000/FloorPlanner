@@ -55,3 +55,7 @@ LINKED to index.html
 #windowSldOutDiv {
   width: 50px;
 }
+/* logo margin */
+#logo {
+  margin: 20;
+}

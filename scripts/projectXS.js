@@ -2,8 +2,8 @@
 // LINKED to index.html
 
 function setup(){
-    var c = document.getElementById("logo");
-    var ctx = c.getContext("2d");
+    const logo_Obj = document.getElementById("logo");
+    const logo = logo_Obj.getContext("2d");
     const planViewObj = document.getElementById("plan-view");
     const elevationViewObj = document.getElementById("elevation-view");
 
@@ -13,15 +13,8 @@ function setup(){
     fillCanvas(planViewObj, planViewCon, "#D2CBCD");
     fillCanvas(elevationViewObj, elevationViewCon, "#A3BCFD");
 
-    var gradient = ctx.createLinearGradient(0, 0, 170, 0);
-    gradient.addColorStop("0", "magenta");
-    gradient.addColorStop("0.5" ,"blue");
-    gradient.addColorStop("1.0", "red");
-    
-    // Fill with gradient
-    ctx.strokeStyle = gradient;
-    ctx.lineWidth = 5;
-    ctx.strokeRect(20, 20, 150, 100);
+    addLogo(logo);
+
 }
 
 function fillCanvas(obj, context, color){
@@ -29,4 +22,13 @@ function fillCanvas(obj, context, color){
     context.beginPath();
     context.fillStyle = color;
     context.fillRect(0, 0, obj.width, obj.height);
+}
+
+function addLogo(context){
+    context.font = "40px Georgia";
+    context.strokeStyle = "blue";
+    context.strokeText("PROJECT", 30, 50);
+    
+    context.font = "60px Georgia";
+    context.strokeText("Xs",210, 50);
 }
