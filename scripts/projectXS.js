@@ -7,7 +7,7 @@ const WALL_COLOR = "#3104fb";
 const WINDOW_COLOR = "#07ebf8";
 const ELEVATION_BACKGROUND = "#A3BCFD";
 
-function setup(){
+function setup(){ 
     const logo_Obj = document.getElementById("logo");
     const logo = logo_Obj.getContext("2d");
     
