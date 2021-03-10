@@ -65,7 +65,7 @@ function setup(){
 }
 
 function drawPlan(obj, ctx) {
-  let thickness = $("#OpaqueSld").val();
+  let thickness = $("#OpaqueSld").val() * SCL;
   let color = $("#insulation-color").val();
 
   //Drawing the Walls with color
@@ -171,7 +171,7 @@ function drawPlan(obj, ctx) {
   if (size != 0) {
     ctx.fillStyle = WINDOW_COLOR;
     ctx.fillRect(
-      x,
+      20 + x,
       obj.height - 48 - t2,
       size * SCL,
       (h1 - h2) / 2 + 2
@@ -181,16 +181,16 @@ function drawPlan(obj, ctx) {
     ctx.lineWidth = "2";
     ctx.setLineDash([4,3]);
     ctx.strokeStyle = "black";
-    ctx.moveTo(x + 1, obj.height - 48 - t2 + 1);
-    ctx.lineTo(225 + 1 - x, obj.height - 48 - t2 + 1);
+    ctx.moveTo(20 + x + 1, obj.height - 48 - t2 + 1);
+    ctx.lineTo(20 + 225 + 1 - x, obj.height - 48 - t2 + 1);
     ctx.stroke();
 
     ctx.beginPath();
     ctx.lineWidth = "2";
     ctx.setLineDash([4,3]);
     ctx.strokeStyle = "black";
-    ctx.moveTo(x + 1, 129);
-    ctx.lineTo(225 + 1 -x, 129);
+    ctx.moveTo(20 + x + 1, 129);
+    ctx.lineTo(20+ 225 + 1 -x, 129);
     ctx.stroke();
   }
   
@@ -199,7 +199,7 @@ function drawPlan(obj, ctx) {
 }
 
 function drawElevation(obj, ctx) {
-  let size = $("#windowAreaSld").val() * 1.70;
+  let size = $("#windowAreaSld").val() * 1.70 - 1;
 
   //Drawing the door
   //OUTER LINE
@@ -246,10 +246,10 @@ function drawElevation(obj, ctx) {
     ctx.lineWidth = "1";
     ctx.strokeStyle = "black";
     ctx.rect(
-      (oX - size * 1.2 * SCL) / 2, 
+      20 + (oX - size * 1.2 * SCL) / 2, 
       oY, 
       size * 1.2 * SCL, 
-      size * SCL
+      size * SCL 
       );
     ctx.stroke();
     //INNER LINE
@@ -257,7 +257,7 @@ function drawElevation(obj, ctx) {
     ctx.lineWidth = "1";
     ctx.strokeStyle = "black";
     ctx.rect(
-      ((oX - size * 1.2 * SCL) / 2) + 3,  
+      20 + ((oX - size * 1.2 * SCL) / 2) + 3,  
       oY + 3, 
       size * 1.2 * SCL - 6, 
       size * SCL - 6
