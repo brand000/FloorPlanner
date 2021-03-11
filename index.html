@@ -15,38 +15,38 @@
     <body onload="setup()">
         <div data-role="page">
             <div class="ui-content">
-                <div id="inputs">
-                    <div class="ui-grid-c ui-responsive">
-                        <div class="ui-block-a ui-responsive">
-                            <canvas id="logo" width="300" height="200"></canvas>
-                        </div>
-                        <div class="ui-block-b ui-responsive">
-                            <div class="ship-crate">
-                                    <img src="image/shipCrate.jpg" width="260px" height="194px">
-                            </div>
-                        </div>
-                        <div class="ui-block-c ui-responsive">
-                            <div class="drop-down-container">
-                                <br><br><br>
-                                <select id="1namethis" onchange="Select()" data-theme="a" data-mini="false">
-                                    <option id="viewChapter" value="VIEW CHAPTERS">VIEW CHAPTERS</option>
-                                    <option value="Ventilation and Drafts" disabled >Ventilation and Drafts</option>
-                                    <option id="insulate"value="Insulation">Insulation</option>
-                                    <option value="Size and Proportion" disabled >Size and Proportion</option>
-                                    <option value="Immediate Context" disabled >Immediate Context</option>
-                                    <option value="Construction Details" disabled >Construction Details</option>
-                                    <option value="Energy Sources" disabled >Energy Sources</option>
-                                    <option value="Refrigeration Cycle" disabled >Refrigeration Cycle</option>
-                                    <option value="Psychometrics" disabled >Psychometrics</option>
-                                    <option value="Environmental Impacts" disabled >Environmental Impacts</option>
-                                    <option value="Radiation and Glazing" disabled >Radiation and Glazing</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="ui-block-d ui-responsive">
-                            <br>
+                <div class="ui-grid-c ui-responsive">
+                    <div class="ui-block-a ui-responsive">
+                        <canvas id="logo" width="300" height="200"></canvas>
+                    </div>
+                    <div class="ui-block-b ui-responsive">
+                        <div class="ship-crate">
+                                <img src="image/shipCrate.jpg" width="260px" height="194px">
                         </div>
                     </div>
+                    <div class="ui-block-c ui-responsive">
+                        <div class="drop-down-container">
+                            <br><br><br>
+                            <select id="chapter-option"  data-theme="a" data-mini="false">
+                                <option id="viewChapter" value="VIEW CHAPTERS">VIEW CHAPTERS</option>
+                                <option value="Ventilation and Drafts" disabled >Ventilation and Drafts</option>
+                                <option id="insulate"value="Insulation">Insulation</option>
+                                <option value="Size and Proportion" disabled >Size and Proportion</option>
+                                <option value="Immediate Context" disabled >Immediate Context</option>
+                                <option value="Construction Details" disabled >Construction Details</option>
+                                <option value="Energy Sources" disabled >Energy Sources</option>
+                                <option value="Refrigeration Cycle" disabled >Refrigeration Cycle</option>
+                                <option value="Psychometrics" disabled >Psychometrics</option>
+                                <option value="Environmental Impacts" disabled >Environmental Impacts</option>
+                                <option value="Radiation and Glazing" disabled >Radiation and Glazing</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="ui-block-d ui-responsive">
+                        <br>
+                    </div>
+                </div>
+                <div id="insulation">
                     <div class="ui-grid-c ui-responsive">
                         <div class="ui-block-a ui-responsive">
                             <div class="canvas">
@@ -67,7 +67,7 @@
                         
                         <div class="ui-block-a ui-responsive">
                             <div class="drop-down-container">
-                                <select id="2namethis" onchange="Select()" data-theme="c">
+                                <select id="2namethis"  data-theme="c">
                                     <option value="0">PLACES WITH DEGREE-DAYS</option>
                                     <option value="1">NV Alert - 13030</option>
                                     <option value="2">NV Iqaluit - 9980</option>
@@ -93,7 +93,7 @@
                         </div>
                         <div class="ui-block-b ui-responsive">
                             <div class="drop-down-container">
-                                <select id="insulation-color" onchange="Select()" data-theme="c">
+                                <select id="insulation-color"  data-theme="c">
                                     <option value="0">OPAQUE CONSTRUCTION WITH R or R/INCH</option>
                                     <option value="1">Bare Container (R1)</option>
                                     <option value="2">Plus Interior Finish, Uninsulated (R2)</option>
@@ -106,7 +106,7 @@
                         <!-- Slider for Opaque thickness -->
                         <div class="ui-block-c ui-responsive">
                             <div class="slider-container">
-                                <input id="OpaqueSld" type="range" value="1" min="1" max="14" ui-slider-input="false" data-highlight="true" data-theme="c" data-track-theme="c">
+                                <input id="OpaqueSld" type="range" value="2" min="2" max="14" ui-slider-input="false" data-highlight="true" data-theme="c" data-track-theme="c">
                             </div>
                             <div class="text-input-container">
                                 <table>
@@ -157,7 +157,7 @@
                                             </div>
                                         </td>
                                         <td>
-                                            ( K ) Opaque Thermal Resistance
+                                            ( K ) Door Thermal Resistance
                                         </td>
                                     </tr>
                                 </table>
@@ -183,7 +183,6 @@
                                 </table>
                             </div>
                         </div>
-                        </div> 
                         <div class="ui-block-d ui-responsive"></div>
                     </div>
                     <br>
@@ -249,7 +248,7 @@
                         <div class="ui-block-a ui-responsive">
                             <div class="drop-down-container">
                             <br>
-                                <select id="4namethis" onchange="Select()" data-theme="a">
+                                <select id="4namethis" data-theme="a">
                                     <option value="0">GRAPHS</option>
                                     <option value="1" disabled>Graph 1</option>
                                     <option value="2" disabled>Graph 2</option>
@@ -259,7 +258,7 @@
                         <div class="ui-block-b ui-responsive">
                             <div class="drop-down-container">
                                 <br>
-                                <select id="5amethis" onchange="Select()" data-theme="a">
+                                <select id="5amethis"  data-theme="a">
                                     <option value="0">READOUTS</option>
                                     <option value="1" disabled>Net to Gross Floor Area</option>
                                     <option value="2" disabled>Energy Bill Per Net Floor Area</option>
@@ -269,7 +268,7 @@
                         <div class="ui-block-c ui-responsive">
                             <div class="drop-down-container">
                                 <br>
-                                <select id="6namethis" onchange="Select()" data-theme="a">
+                                <select id="6namethis" data-theme="a">
                                     <option value="0">CONCEPTS</option>
                                     <option value="1">Local Conditions</option>
                                     <option value="2">Annual Energy Budget</option>
