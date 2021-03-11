@@ -1,4 +1,4 @@
-/* 
+/*
 projectxs.css
 LINKED to index.html
 */
@@ -45,11 +45,16 @@ LINKED to index.html
   margin: 0 auto;
   padding: 0 10px;
 }
+
+.chapters {
+  color: blue;
+}
 /* Aligning the canvases and the ship crate img with the select elements */
 .canvas,
 .ship-crate {
   margin-left: 10px;
 }
+
 /* user defined id's                 */
 #planSldOutDiv,
 #windowSldOutDiv {
@@ -58,12 +63,4 @@ LINKED to index.html
 /* logo margin */
 #logo {
   margin: 20;
-}
-
-#viewChapter {
-  color: blue;
-}
-
-#insulate {
-  color: blue;
 }
