@@ -35,7 +35,7 @@ function setup(){
     fillCanvas(elevationObj, elevationViewContext, ELEVATION_BACKGROUND);
 
     addLogo(logo);
-    
+    Concepts();
     drawPlan(planObj, planViewContext);
     drawElevation(elevationObj, elevationViewContext);
 
@@ -123,6 +123,40 @@ function setup(){
       //recalculate Overall Effective Thermal Resistance
       calculateEffectiveOverallThermalRes();
     });
+}
+
+// controls the options of the Concept menu
+function Concepts(){
+  // concept hide options
+    $("#localCondations").hide();
+    $("#annual-energy").hide();
+    $("#drafts-ventilation").hide();
+    $("#insulation-heatloss").hide();
+    $("#materials-Insulation").hide();
+    $("#environmental-impact").hide();
+
+  // show options when selected
+  $("#concepts-options").on("change", function () {
+    if ($("#concepts-options").val() == "1") {
+      $("#localCondations").show();
+    }
+    if ($("#concepts-options").val() == "2") {
+      $("#annual-energy").show();
+    }
+    if ($("#concepts-options").val() == "3") {
+      $("#drafts-ventilation").show();
+    }
+    if ($("#concepts-options").val() == "4") {
+      $("#insulation-heatloss").show();
+    }
+    if ($("#concepts-options").val() == "5") {
+      $("#materials-Insulation").show();
+    }
+    if ($("#concepts-options").val() == "6") {
+      $("#environmental-impact").show();
+    }
+  });
+
 }
 
 function drawPlan(obj, ctx) {
