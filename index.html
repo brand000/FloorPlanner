@@ -27,7 +27,7 @@
                     <div class="ui-block-c ui-responsive">
                         <div class="drop-down-container">
                             <br><br><br>
-                            <select id="chapter-option"  data-theme="a" data-mini="false">
+                            <select id="chapter-option" class = "chapters"  data-theme="a" data-mini="false">
                                 <option id="viewChapter" value="VIEW CHAPTERS">VIEW CHAPTERS</option>
                                 <option value="Ventilation and Drafts" disabled >Ventilation and Drafts</option>
                                 <option id="insulate"value="Insulation">Insulation</option>
@@ -46,7 +46,7 @@
                         <br>
                     </div>
                 </div>
-                <div id="insulation">
+                <div class="insulation">
                     <div class="ui-grid-c ui-responsive">
                         <div class="ui-block-a ui-responsive">
                             <div class="canvas">
@@ -64,10 +64,12 @@
     
     
                     <div class="ui-grid-c ui-responsive">
-                        
+    
                         <div class="ui-block-a ui-responsive">
                             <div class="drop-down-container">
+    
                                 <select id="placesWithDegreeDays"  data-theme="c">
+    
                                     <option value="0">PLACES WITH DEGREE-DAYS</option>
                                     <option value="1">NV Alert - 13030</option>
                                     <option value="2">NV Iqaluit - 9980</option>
@@ -93,7 +95,7 @@
                         </div>
                         <div class="ui-block-b ui-responsive">
                             <div class="drop-down-container">
-                                <select id="insulation-color"  data-theme="c">
+                                <select id="insulation-color" data-theme="c">
                                     <option value="0">OPAQUE CONSTRUCTION WITH R or R/INCH</option>
                                     <option value="1">Bare Container (R1)</option>
                                     <option value="2">Plus Interior Finish, Uninsulated (R2)</option>
@@ -143,7 +145,7 @@
                                     </tr>
                                 </table>
                             </div>
-                        </div> 
+                        </div>
                         <!-- Slider for Opaque Thermal Resistance -->
                         <div class="ui-block-b ui-responsive">
                             <div class="slider-container">
@@ -158,12 +160,12 @@
                                             </div>
                                         </td>
                                         <td>
-                                            ( K ) Door Thermal Resistance
+                                            ( K ) Opaque Thermal Resistance
                                         </td>
                                     </tr>
                                 </table>
                             </div>
-                        </div> 
+                        </div>
                         <!-- Slider for Window Thermal Resistance -->
                         <div class="ui-block-c ui-responsive">
                             <div class="slider-container">
@@ -207,7 +209,7 @@
                                     </tr>
                                 </table>
                             </div>
-                        </div> 
+                        </div>
                         <div class="ui-block-b ui-responsive">
                             <div class="text-input-container">
                                 <table>
@@ -218,8 +220,8 @@
                                             </div>
                                         </td>
                                         <td>
-                                            ( R ) Effective Overall 
-                                                    Thermal Resistance 
+                                            ( R ) Effective Overall
+                                                    Thermal Resistance
                                         </td>
                                     </tr>
                                 </table>
@@ -242,21 +244,21 @@
                                     </tr>
                                 </table>
                             </div>
-                        </div> 
-                        <div class="ui-block-d ui-responsive"></div> 
+                        </div>
+                        <div class="ui-block-d ui-responsive"></div>
                     </div>
     
                     <div class="ui-grid-c ui-responsive">
                         <div class="ui-block-a ui-responsive">
                             <div class="drop-down-container">
                             <br>
-                                <select id="4namethis" data-theme="a">
+                                <select id="4namethis"  data-theme="a">
                                     <option value="0">GRAPHS</option>
                                     <option value="1" disabled>Graph 1</option>
                                     <option value="2" disabled>Graph 2</option>
                                 </select>
                             </div>
-                        </div> 
+                        </div>
                         <div class="ui-block-b ui-responsive">
                             <div class="drop-down-container">
                                 <br>
@@ -266,11 +268,11 @@
                                     <option value="2" disabled>Energy Bill Per Net Floor Area</option>
                                 </select>
                             </div>
-                        </div> 
+                        </div>
                         <div class="ui-block-c ui-responsive">
                             <div class="drop-down-container">
                                 <br>
-                                <select id="6namethis" data-theme="a">
+                                <select id="6namethis"  data-theme="a">
                                     <option value="0">CONCEPTS</option>
                                     <option value="1">Local Conditions</option>
                                     <option value="2">Annual Energy Budget</option>
@@ -280,10 +282,11 @@
                                     <option value="6">Environmental Impact</option>
                                 </select>
                             </div>
-                        </div> 
-                        <div class="ui-block-d ui-responsive"></div> 
+                        </div>
+                        <div class="ui-block-d ui-responsive"></div>
                     </div>
                 </div>
+                <!-- end of insulation div -->
             </div>
         </div>
     </body>
