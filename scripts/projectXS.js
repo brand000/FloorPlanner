@@ -7,6 +7,8 @@ const WALL_COLOR = "#3104fb";
 const WINDOW_COLOR = "#07ebf8";
 const ELEVATION_BACKGROUND = "#A3BCFD";
 const OPAQUE_CONSTRUCTION = [0, 0, 0, 3, 3, 6];
+const DEGREE_DAYS = [1, 13030, 9980, 9000, 8170, 7100, 6440, 6050, 5670, 5500, 5000, 4800, 4670, 4520, 4460, 4300, 4000, 3500, 3400, 3000];
+const CONCEPTS = ["","localConditions", "annualEnergyBudget", "draftsAndVentiation", "insulationAndHeatloss", "materialsAndInsulation", "environmentalImpact"];
 
 function setup(){ 
     const logo_Obj = document.getElementById("logo");
@@ -122,6 +124,28 @@ function setup(){
     $("#windowThermalResOut").change(function() {
       //recalculate Overall Effective Thermal Resistance
       calculateEffectiveOverallThermalRes();
+    });
+
+    // register DEGREE_DAYS in the calculations of Annual Energy
+    $("#placesWithDegreeDays").on("change", function() {
+      //calculate Annual Energy
+      calculateAnnualEnergy();
+    });
+
+    // recalculate Annual Energy when Effective Overall Thermal Resistance output is changed
+    $("#effectiveOverallThermalResOut").on("change", function () {
+      //calculate Annual Energy
+      calculateAnnualEnergy();
+    });
+
+    //hide the paragrapghs for CONCEPT
+    for(let i = 0; i < CONCEPTS.length; i++) {
+      $("#"+CONCEPTS[i]).hide();
+    }
+
+    //show appropriate concept when chosen
+    $("#conceptSelect").on("change", function () {
+      showConcept();
     });
 }
 
@@ -362,13 +386,39 @@ function calculateEffectiveOverallThermalRes(){
   let doorThermal = $("#doorThermalOut").val();
 
   var calc = 1 / ( ( (800 - windowArea)/opaqueThermal + windowArea/windowThermal + 20/doorThermal) / 820 );
-  console.log(windowArea, opaqueThermal, windowThermal, doorThermal);
   $("#effectiveOverallThermalResOut").val(calc.toFixed(0));
+  // run the change event
+  $("#effectiveOverallThermalResOut").change();
 }
 
 function calculateAnnualEnergy(){
-  let effectiveOverallThermaRes = $("#effectiveOverallThermalResOut").val();
-  let places = $("#placesWithDegreeDays").val()
+  let place = $("#placesWithDegreeDays").val()
 
-  
+  if(place == 0){
+    $("#annualEnergyOut").val("");
+    return;
+  }
+
+  let effectiveOverallThermaRes = $("#effectiveOverallThermalResOut").val();
+  if(effectiveOverallThermaRes == 0){
+    $("#annualEnergyOut").val("");
+    return;
+  }
+
+  var calc = ( 820 * DEGREE_DAYS[place] * 1.8 * 24 / effectiveOverallThermaRes ) / 3412 + DEGREE_DAYS[place] * 1.8 * 24 * 65 / 3412 + 3000;
+
+  $("#annualEnergyOut").val(Math.trunc(calc));
+}
+
+function  showConcept() {
+  let selected = $("#conceptSelect").val();
+
+  for(let i = 1; i < CONCEPTS.length; i++) {
+    if(i == selected) {
+      $("#"+CONCEPTS[i]).show();
+      continue;
+    }
+    $("#"+CONCEPTS[i]).hide();
+  }
+
 }
