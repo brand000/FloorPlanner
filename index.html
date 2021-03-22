@@ -67,7 +67,7 @@
                         
                         <div class="ui-block-a ui-responsive">
                             <div class="drop-down-container">
-                                <select id="2namethis"  data-theme="c">
+                                <select id="placesWithDegreeDays"  data-theme="c">
                                     <option value="0">PLACES WITH DEGREE-DAYS</option>
                                     <option value="1">NV Alert - 13030</option>
                                     <option value="2">NV Iqaluit - 9980</option>
@@ -126,6 +126,7 @@
                         <div class="ui-block-d ui-responsive"></div>
                     </div>
                     <br>
+                    <!-- Output for Opaque Therma Resistance -->
                     <div class="ui-grid-c ui-responsive">
                         <div class="ui-block-a ui-responsive">
                             <div class="text-input-container">
@@ -133,7 +134,7 @@
                                     <tr>
                                         <td>
                                             <div id="OpaqueThermal" class="input-text">
-                                                <input id="windowSldOut" type="text">
+                                                <input id="opaqueThermalOut" type="text">
                                             </div>
                                         </td>
                                         <td>
@@ -146,14 +147,14 @@
                         <!-- Slider for Opaque Thermal Resistance -->
                         <div class="ui-block-b ui-responsive">
                             <div class="slider-container">
-                                <input id="windowSld" type="range" value="1" min="1" max="14" ui-slider-input="false" data-highlight="true" data-theme="c" data-track-theme="c">
+                                <input id="doorThermalSld" type="range" value="2" min="2" max="12" ui-slider-input="false" data-highlight="true" data-theme="c" data-track-theme="c">
                             </div>
                             <div class="text-input-container">
                                 <table>
                                     <tr>
                                         <td>
                                             <div id="doorthermal" class="input-text">
-                                                <input id="windowSldOut" type="text">
+                                                <input id="doorThermalOut" type="text">
                                             </div>
                                         </td>
                                         <td>
@@ -166,14 +167,14 @@
                         <!-- Slider for Window Thermal Resistance -->
                         <div class="ui-block-c ui-responsive">
                             <div class="slider-container">
-                                <input id="windowSld" type="range" value="0" min="0" max="48" ui-slider-input="false" data-highlight="true" data-theme="c" data-track-theme="c">
+                                <input id="windowThermalResSld" type="range" value="1" min="1" max="10" ui-slider-input="false" data-highlight="true" data-theme="c" data-track-theme="c">
                             </div>
                             <div class="text-input-container">
                                 <table>
                                     <tr>
                                         <td>
                                             <div id="windowthermal" class="input-text">
-                                                <input id="windowSldOut" type="text">
+                                                <input id="windowThermalResOut" type="text">
                                             </div>
                                         </td>
                                         <td>
@@ -190,7 +191,7 @@
                     <div class="ui-grid-c ui-responsive">
                         <div class="ui-block-a ui-responsive">
                             <div class="slider-container">
-                                <input id="windowAreaSld" type="range" value="0" min="0" max="48" ui-slider-input="false" data-highlight="true" data-theme="c" data-track-theme="c">
+                                <input id="windowAreaSld" type="range" value="0" min="0" max="108" ui-slider-input="false" data-highlight="true" data-theme="c" data-track-theme="c">
                             </div>
                             <div class="text-input-container">
                                 <table>
@@ -213,7 +214,7 @@
                                     <tr>
                                         <td>
                                             <div id="windowSl" class="input-text">
-                                                <input id="windowSldOut" type="text">
+                                                <input id="effectiveOverallThermalResOut" type="text">
                                             </div>
                                         </td>
                                         <td>
@@ -224,13 +225,14 @@
                                 </table>
                             </div>
                         </div> 
+                        <!-- Annual Energy output -->
                         <div class="ui-block-c ui-responsive">
                             <div class="text-input-container">
                                 <table>
                                     <tr>
                                         <td>
                                             <div id="effectivethermal" class="annual-energy-input">
-                                                <input id="annualEnergy" type="text">
+                                                <input id="annualEnergyOut" type="text">
                                             </div>
                                         </td>
                                         <td>

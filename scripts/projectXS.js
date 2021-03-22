@@ -6,6 +6,7 @@ const INSULATION_COLOR = ["#D2CBCD", "#D2CBCD", "#e8e5e4", "#fec7d4", "#fdfaaa"]
 const WALL_COLOR = "#3104fb";
 const WINDOW_COLOR = "#07ebf8";
 const ELEVATION_BACKGROUND = "#A3BCFD";
+const OPAQUE_CONSTRUCTION = [0, 0, 0, 3, 3, 6];
 
 function setup(){ 
     const logo_Obj = document.getElementById("logo");
@@ -23,7 +24,12 @@ function setup(){
     //Initialize numbers for the inputs
     $("#OpaqueInput").val(2);
     $("#windowAreaInput").val(0);
-    
+    $("#opaqueThermalOut").val(0);
+    $("#doorThermalOut").val(2);
+    $("#windowThermalResOut").val(1);
+    $("#effectiveOverallThermalResOut").val("");
+    $("#annualEnergyOut").val("");
+
     //Clear the canvas and fill with the background color
     fillCanvas(planObj, planViewContext, INSULATION_COLOR[0]);
     fillCanvas(elevationObj, elevationViewContext, ELEVATION_BACKGROUND);
@@ -33,12 +39,25 @@ function setup(){
     drawPlan(planObj, planViewContext);
     drawElevation(elevationObj, elevationViewContext);
 
+    // Set the step to .5 each for the Opaque Slider
+    document.getElementById("OpaqueSld").step = ".5";
     // register the wall thickness slider
     $("#OpaqueSld").on("change", function () {
+
         drawPlan(planObj, planViewContext);
-        $("#OpaqueInput").val($("#OpaqueSld").val());
+
+        let val = $("#OpaqueSld").val();
+        if(val >= 4){
+          $("#OpaqueInput").attr("min", "4")
+          $("#OpaqueInput").val(val);
+
+          //recalculate the Opaque Thermal Resistance
+          calculateOpaqueThermalResistance();
+        }
     });
 
+    // Set the step to .5 each for the Opaque Slider
+    document.getElementById("windowAreaSld").step = ".1";
     // register the window thickness slider
     $("#windowAreaSld").on("change", function () {
         drawPlan(planObj, planViewContext);
@@ -47,11 +66,16 @@ function setup(){
         drawElevation(elevationObj, elevationViewContext);
 
         $("#windowAreaInput").val($("#windowAreaSld").val());
+        // Trigger the event
+        $("#windowAreaInput").change();
     });
 
     // register the insulation-color select element
     $("#insulation-color").on("change", function () {
       drawPlan(planObj, planViewContext);
+
+      // recalculate Opaque Thermal Resistance
+      calculateOpaqueThermalResistance();
     });
         
     // register the select menu for CHAPTERS
@@ -61,6 +85,43 @@ function setup(){
       }else{
         location.reload();
       }
+    });
+
+    // register the Door Thermal Resistance output to the Slider
+    $("#doorThermalSld").on("change", function() {
+
+      $("#doorThermalOut").val($("#doorThermalSld").val());
+      // Trigger the change event
+      $("#doorThermalOut").change();
+    });
+
+    //register the Window Thermal Resistance output to the Slider
+    $("#windowThermalResSld").on("change", function() {
+
+      $("#windowThermalResOut").val($("#windowThermalResSld").val());
+      //call the change event
+      $("#windowThermalResOut").change();
+    });
+
+    //recalculate Overall Effective Thermal Resistance when Opaque Thermal Resistance output is changed
+    $("#opaqueThermalOut").change(function() {
+      //recalculate Overall Effective Thermal Resistance
+      calculateEffectiveOverallThermalRes();
+    });
+    //recalculate Overall Effective Thermal Resistance when Window Area output is changed
+    $("#windowAreaInput").change(function() {
+      //recalculate Overall Effective Thermal Resistance
+      calculateEffectiveOverallThermalRes();
+    });
+    //recalculate Overall Effective Thermal Resistance when Door Thermal Resistance output is changed
+    $("#doorThermalOut").change(function() {
+      //recalculate Overall Effective Thermal Resistance
+      calculateEffectiveOverallThermalRes();
+    });
+    //recalculate Overall Effective Thermal Resistance when Window Thermal Resistance output is changed
+    $("#windowThermalResOut").change(function() {
+      //recalculate Overall Effective Thermal Resistance
+      calculateEffectiveOverallThermalRes();
     });
 }
 
@@ -165,7 +226,7 @@ function drawPlan(obj, ctx) {
   ctx.stroke();
   
   //Drawing the Window/Glass
-  let size = $("#windowAreaSld").val() * 2;
+  let size = Math.trunc($("#windowAreaSld").val()) / 2.25 * 2;
   let x = (225 - size * SCL) / 2;
 
   if (size != 0) {
@@ -199,7 +260,7 @@ function drawPlan(obj, ctx) {
 }
 
 function drawElevation(obj, ctx) {
-  let size = $("#windowAreaSld").val() * 1.70 - 1;
+  let size = Math.trunc($("#windowAreaSld").val()) / 2.25 * 1.70 - 1;
 
   //Drawing the door
   //OUTER LINE
@@ -281,4 +342,33 @@ function addLogo(context){
   
   context.font = "60px Georgia";
   context.strokeText("Xs",210, 50);
+}
+
+function calculateOpaqueThermalResistance(){
+  let opaqueConstruction = $("#insulation-color").val();
+  let opaqueThickness = $("#OpaqueInput").val();
+
+  var calc = 2 + (opaqueThickness - 2) * OPAQUE_CONSTRUCTION[opaqueConstruction];
+
+  $("#opaqueThermalOut").val(calc);
+  // Trigger the event
+  $("#opaqueThermalOut").change();
+}
+
+function calculateEffectiveOverallThermalRes(){
+  let windowArea = $("#windowAreaInput").val();
+  let opaqueThermal = $("#opaqueThermalOut").val();
+  let windowThermal = $("#windowThermalResOut").val();
+  let doorThermal = $("#doorThermalOut").val();
+
+  var calc = 1 / ( ( (800 - windowArea)/opaqueThermal + windowArea/windowThermal + 20/doorThermal) / 820 );
+  console.log(windowArea, opaqueThermal, windowThermal, doorThermal);
+  $("#effectiveOverallThermalResOut").val(calc.toFixed(0));
+}
+
+function calculateAnnualEnergy(){
+  let effectiveOverallThermaRes = $("#effectiveOverallThermalResOut").val();
+  let places = $("#placesWithDegreeDays").val()
+
+  
 }
