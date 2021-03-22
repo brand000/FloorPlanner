@@ -37,7 +37,6 @@ function setup(){
     fillCanvas(elevationObj, elevationViewContext, ELEVATION_BACKGROUND);
 
     addLogo(logo);
-    
     drawPlan(planObj, planViewContext);
     drawElevation(elevationObj, elevationViewContext);
 
