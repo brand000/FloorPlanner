@@ -419,5 +419,4 @@ function  showConcept() {
     }
     $("#"+CONCEPTS[i]).hide();
   }
-
 }
