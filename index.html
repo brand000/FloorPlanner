@@ -1,3 +1,7 @@
+<!-- 
+    index.html
+    Author: Brandon Watson, Laurence Cortez, Fardin
+ -->
 <!DOCTYPE html5>
 <html>
     <head>
@@ -16,14 +20,17 @@
         <div data-role="page">
             <div class="ui-content">
                 <div class="ui-grid-c ui-responsive">
+                    <!-- Canvas for the logo -->
                     <div class="ui-block-a ui-responsive">
                         <canvas id="logo" width="300" height="200"></canvas>
                     </div>
+                    <!-- The Ship Crate Image -->
                     <div class="ui-block-b ui-responsive">
                         <div class="ship-crate">
                                 <img src="image/shipCrate.jpg" width="260px" height="194px">
                         </div>
                     </div>
+                    <!-- View Chapter selection -->
                     <div class="ui-block-c ui-responsive">
                         <div class="drop-down-container">
                             <br><br><br>
@@ -42,11 +49,14 @@
                             </select>
                         </div>
                     </div>
+                    <!-- Empty column -->
                     <div class="ui-block-d ui-responsive">
                         <br>
                     </div>
                 </div>
+                <!-- Insulation Plan -->
                 <div id="insulation">
+                    <!-- Empty row -->
                     <div class="ui-grid-c ui-responsive">
                         <div class="ui-block-a ui-responsive">
                             <div class="canvas">
@@ -63,7 +73,8 @@
                     </div>
     
                     <div class="ui-grid-c ui-responsive">
-    
+                        
+                        <!-- Places with degree days selection -->
                         <div class="ui-block-a ui-responsive">
                             <div class="drop-down-container">
     
@@ -92,6 +103,7 @@
                                 </select>
                             </div>
                         </div>
+                        <!-- Opaque Construction selection -->
                         <div class="ui-block-b ui-responsive">
                             <div class="drop-down-container">
                                 <select id="insulation-color" data-theme="c">
@@ -113,6 +125,7 @@
                                 <table>
                                     <tr>
                                         <td>
+                                            <!-- Opaque Thickness output -->
                                             <div id="windowSldOutDiv" class="input-text">
                                                 <input id="opaqueOutput" type="text">
                                             </div>
@@ -124,16 +137,19 @@
                                 </table>
                             </div>
                         </div>
+                        <!-- Empty column -->
                         <div class="ui-block-d ui-responsive"></div>
                     </div>
                     <br>
                     <!-- Output for Opaque Therma Resistance -->
                     <div class="ui-grid-c ui-responsive">
+                        <!-- Slider for Opaque Thermal Resistance -->
                         <div class="ui-block-a ui-responsive">
                             <div class="text-input-container">
                                 <table>
                                     <tr>
                                         <td>
+                                            <!-- Opaque Thermal Resistance Output -->
                                             <div id="OpaqueThermal" class="input-text">
                                                 <input id="opaqueThermalOutput" type="text">
                                             </div>
@@ -154,6 +170,7 @@
                                 <table>
                                     <tr>
                                         <td>
+                                            <!-- Door Thermal Resistance Output -->
                                             <div id="doorthermal" class="input-text">
                                                 <input id="doorThermalOutput" type="text">
                                             </div>
@@ -174,6 +191,7 @@
                                 <table>
                                     <tr>
                                         <td>
+                                            <!-- Window Thermal Resistance Output -->
                                             <div id="windowthermal" class="input-text">
                                                 <input id="windowThermalResOutput" type="text">
                                             </div>
@@ -198,6 +216,7 @@
                                 <table>
                                     <tr>
                                         <td>
+                                            <!-- Window Area Output -->
                                             <div id="windowthermal" class="input-text">
                                                 <input id="windowAreaOutput" type="text">
                                             </div>
@@ -214,6 +233,7 @@
                                 <table>
                                     <tr>
                                         <td>
+                                            <!-- Effective Overall Thermal Resistance output -->
                                             <div id="windowSl" class="input-text">
                                                 <input id="effectiveOverallThermalResOutput" type="text">
                                             </div>
@@ -232,6 +252,7 @@
                                 <table>
                                     <tr>
                                         <td>
+                                            <!-- Annual Energy output -->
                                             <div id="effectivethermal" class="annual-energy-input">
                                                 <input id="annualEnergyOutput" type="text">
                                             </div>
@@ -244,13 +265,15 @@
                                 </table>
                             </div>
                         </div>
+                        <!-- Empty column -->
                         <div class="ui-block-d ui-responsive"></div>
                     </div>
-    
                     <div class="ui-grid-c ui-responsive">
+                        
                         <div class="ui-block-a ui-responsive">
                             <div class="drop-down-container">
                             <br>
+                                <!-- Graphs Selection -->
                                 <select id="4namethis"  data-theme="a">
                                     <option value="0">GRAPHS</option>
                                     <option value="1" disabled>Graph 1</option>
@@ -261,6 +284,7 @@
                         <div class="ui-block-b ui-responsive">
                             <div class="drop-down-container">
                                 <br>
+                                <!-- Readouts selection -->
                                 <select id="5amethis"  data-theme="a">
                                     <option value="0">READOUTS</option>
                                     <option value="1" disabled>Net to Gross Floor Area</option>
@@ -271,6 +295,7 @@
                         <div class="ui-block-c ui-responsive">
                             <div class="drop-down-container">
                                 <br>
+                                <!-- Concepts selection -->
                                 <select id="conceptSelect"  data-theme="a">
                                     <option value="0">CONCEPTS</option>
                                     <option value="1">Local Conditions</option>
