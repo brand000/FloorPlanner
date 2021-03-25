@@ -1,18 +1,32 @@
-// projectXS.js
-// LINKED to index.html
+/**
+ * projextXS.js
+ * Linked to index.html
+ * Author: Brandon Watson, Laurence Cortez, Fardin 
+ */
 
+// SCL is the Scale Factor (used in formulas)
 const SCL = 1.35;
+// INSULATION_COLO array contains the color of the insulation in order they are in the select options
 const INSULATION_COLOR = ["#D2CBCD", "#D2CBCD", "#e8e5e4", "#fec7d4", "#fdfaaa"];
+// WALL_COLOR is the color used on Insulation/Wall
 const WALL_COLOR = "#3104fb";
+// WINDOW_COLOR is the color used on the window in the Plan View
 const WINDOW_COLOR = "#07ebf8";
+// ELEVATION_BACKGROUND is the fill of the canvas for Elevation View
 const ELEVATION_BACKGROUND = "#A3BCFD";
+// OPAQUE_CONSTRUCTION contains the values used in the calculations based on the order in the select options
 const OPAQUE_CONSTRUCTION = [0, 0, 0, 3, 3, 6];
+// DEGREE_DAYS contains the values used in calculations according to the order in the select options
 const DEGREE_DAYS = [1, 13030, 9980, 9000, 8170, 7100, 6440, 6050, 5670, 5500, 5000, 4800, 4670, 4520, 4460, 4300, 4000, 3500, 3400, 3000];
+// CONCEPTS array contains the element IDs of the concept divs in the html file, this is used for easier showing and hiding the elements
 const CONCEPTS = ["","localConditions", "annualEnergyBudget", "draftsAndVentiation", "insulationAndHeatloss", "materialsAndInsulation", "environmentalImpact"];
 
+/**  
+ * Loads everything needed for the page to work.
+ */
 function setup(){ 
     const logo_Obj = document.getElementById("logo");
-    const logo = logo_Obj.getContext("2d");
+    const logoContext = logo_Obj.getContext("2d");
     
     const planObj = document.getElementById("plan-view");
     const elevationObj = document.getElementById("elevation-view");
@@ -20,37 +34,51 @@ function setup(){
     const planViewContext = planObj.getContext("2d");
     const elevationViewContext = elevationObj.getContext("2d");
 
-    //Hide insulation chapter
+    // Hide insulation chapter
     $("#insulation").hide();
 
-    //Initialize numbers for the inputs
-    $("#OpaqueInput").val(2);
-    $("#windowAreaInput").val(0);
-    $("#opaqueThermalOut").val(0);
-    $("#doorThermalOut").val(2);
-    $("#windowThermalResOut").val(1);
-    $("#effectiveOverallThermalResOut").val("");
-    $("#annualEnergyOut").val("");
+    // Initialize Opaque output to 2
+    $("#opaqueOutput").val(2);
+    // Initialize Window Area output to 0
+    $("#windowAreaOutput").val(0);
+    // Initialize the Opaque Thermal Output to 0
+    $("#opaqueThermalOutput").val(0);
+    // Initialize the Door Thermal output to 2
+    $("#doorThermalOutput").val(2);
+    // Initialize the Window Thermal Resistance output to 1
+    $("#windowThermalResOutput").val(1);
+    // Initialize the effective Thermal Resistance output to blank
+    $("#effectiveOverallThermalResOutput").val("");
+    // Initialize the Annual Energy output to blank
+    $("#annualEnergyOutput").val("");
 
-    //Clear the canvas and fill with the background color
+    //Clear the canvas' and fill with the background color
     fillCanvas(planObj, planViewContext, INSULATION_COLOR[0]);
     fillCanvas(elevationObj, elevationViewContext, ELEVATION_BACKGROUND);
 
-    addLogo(logo);
+    // Draws the logo to the page
+    addLogo(logoContext);
+    
+    // Draws the Plan View and Elevation View with the initial values
     drawPlan(planObj, planViewContext);
     drawElevation(elevationObj, elevationViewContext);
 
     // Set the step to .5 each for the Opaque Slider
     document.getElementById("OpaqueSld").step = ".5";
-    // register the wall thickness slider
+
+    // register the wall thickness slider to the Opaque Thickness output
     $("#OpaqueSld").on("change", function () {
 
+        // Everytime the slider is changed, re-draw the Plan View
         drawPlan(planObj, planViewContext);
 
+        // val contains the value of the Opaque Thickness slider
         let val = $("#OpaqueSld").val();
         if(val >= 4){
-          $("#OpaqueInput").attr("min", "4")
-          $("#OpaqueInput").val(val);
+          // Set the min attribute for the Opaque output to 4 when the value of Opaque Thickness slider is >= 4
+          $("#opaqueOutput").attr("min", "4");
+          // Reflect the slider value to the Opaque Thicknness output only when the slider value is >= 4
+          $("#opaqueOutput").val(val);
 
           //recalculate the Opaque Thermal Resistance
           calculateOpaqueThermalResistance();
@@ -59,102 +87,121 @@ function setup(){
 
     // Set the step to .5 each for the Opaque Slider
     document.getElementById("windowAreaSld").step = ".1";
-    // register the window thickness slider
+    // Register the Window Thickness slider to the output
     $("#windowAreaSld").on("change", function () {
+
+        // Re-draw the Plan View when the slider is changed
         drawPlan(planObj, planViewContext);
 
+        // Fill the Elevation Canvas and re-draw the Elevation View
         fillCanvas(elevationObj, elevationViewContext, ELEVATION_BACKGROUND)
         drawElevation(elevationObj, elevationViewContext);
 
-        $("#windowAreaInput").val($("#windowAreaSld").val());
-        // Trigger the event
-        $("#windowAreaInput").change();
+        // Reflect the Window Area slider value to the output
+        $("#windowAreaOutput").val(($("#windowAreaSld").val() / 12 * 6.744).toFixed(1));
+        // Trigger the change event so that other calculations will be done
+        $("#windowAreaOutput").change();
     });
 
-    // register the insulation-color select element
+    // Register the Opaque Construction select element to change the color when a selection is made
     $("#insulation-color").on("change", function () {
+      // Redraw the Plan View
       drawPlan(planObj, planViewContext);
 
-      // recalculate Opaque Thermal Resistance
+      // Recalculate Opaque Thermal Resistance output
       calculateOpaqueThermalResistance();
     });
-        
-    // register the select menu for CHAPTERS
+     
+    // Show the insulation plan if the page is reloaded while Insulation is selected
+    if ($("#chapter-option").val() == "Insulation") {
+      $("#insulation").show();
+    }
+    // Register the select menu for CHAPTERS
     $("#chapter-option").on("change", function () {
+      // Shows the Insulation plan
       if ($("#chapter-option").val() == "Insulation") {
         $("#insulation").show();
       }else{
+        // Reloads the page
         location.reload();
       }
     });
 
-    // register the Door Thermal Resistance output to the Slider
+    // Register the Door Thermal Resistance output to the Slider
     $("#doorThermalSld").on("change", function() {
-
-      $("#doorThermalOut").val($("#doorThermalSld").val());
-      // Trigger the change event
-      $("#doorThermalOut").change();
+      // Reflect the Door Thermal Output to the slider
+      $("#doorThermalOutput").val($("#doorThermalSld").val());
+      // Trigger the change event for other calculations to happen
+      $("#doorThermalOutput").change();
     });
 
-    //register the Window Thermal Resistance output to the Slider
+    // Register the Window Thermal Resistance output to the slider
     $("#windowThermalResSld").on("change", function() {
-
-      $("#windowThermalResOut").val($("#windowThermalResSld").val());
-      //call the change event
-      $("#windowThermalResOut").change();
+      // Reflect the Window Thermal Resistance output to the slider
+      $("#windowThermalResOutput").val($("#windowThermalResSld").val());
+      // Call the change event for other calculations to happen
+      $("#windowThermalResOutput").change();
     });
 
-    //recalculate Overall Effective Thermal Resistance when Opaque Thermal Resistance output is changed
-    $("#opaqueThermalOut").change(function() {
-      //recalculate Overall Effective Thermal Resistance
+    // Recalculate Overall Effective Thermal Resistance when Opaque Thermal Resistance output is changed
+    $("#opaqueThermalOutput").change(function() {
+      // Recalculate Overall Effective Thermal Resistance
       calculateEffectiveOverallThermalRes();
     });
-    //recalculate Overall Effective Thermal Resistance when Window Area output is changed
-    $("#windowAreaInput").change(function() {
-      //recalculate Overall Effective Thermal Resistance
+    // Recalculate Overall Effective Thermal Resistance when Window Area output is changed
+    $("#windowAreaOutput").change(function() {
+      // Recalculate Overall Effective Thermal Resistance
       calculateEffectiveOverallThermalRes();
     });
-    //recalculate Overall Effective Thermal Resistance when Door Thermal Resistance output is changed
-    $("#doorThermalOut").change(function() {
-      //recalculate Overall Effective Thermal Resistance
+    // Recalculate Overall Effective Thermal Resistance when Door Thermal Resistance output is changed
+    $("#doorThermalOutput").change(function() {
+      // Recalculate Overall Effective Thermal Resistance
       calculateEffectiveOverallThermalRes();
     });
-    //recalculate Overall Effective Thermal Resistance when Window Thermal Resistance output is changed
-    $("#windowThermalResOut").change(function() {
-      //recalculate Overall Effective Thermal Resistance
+    // Recalculate Overall Effective Thermal Resistance when Window Thermal Resistance output is changed
+    $("#windowThermalResOutput").change(function() {
+      // Recalculate Overall Effective Thermal Resistance
       calculateEffectiveOverallThermalRes();
     });
 
-    // register DEGREE_DAYS in the calculations of Annual Energy
+    // Register DEGREE_DAYS selection in the calculations of Annual Energy
     $("#placesWithDegreeDays").on("change", function() {
-      //calculate Annual Energy
+      // Calculate Annual Energy
       calculateAnnualEnergy();
     });
 
-    // recalculate Annual Energy when Effective Overall Thermal Resistance output is changed
-    $("#effectiveOverallThermalResOut").on("change", function () {
-      //calculate Annual Energy
+    // Recalculate Annual Energy when Effective Overall Thermal Resistance output is changed
+    $("#effectiveOverallThermalResOutput").on("change", function () {
+      // Recalculate Annual Energy
       calculateAnnualEnergy();
     });
 
-    //hide the paragrapghs for CONCEPT
+    // Hide the paragraphs for CONCEPT
     for(let i = 0; i < CONCEPTS.length; i++) {
       $("#"+CONCEPTS[i]).hide();
     }
 
-    //show appropriate concept when chosen
+    // Show selected concept, this is useful when reloading the page
+    showConcept();
+    // Show appropriate concept when a selection is made.
     $("#conceptSelect").on("change", function () {
       showConcept();
     });
 }
 
+/**
+ * Draws the Plan View, calculations are done inside
+ */
 function drawPlan(obj, ctx) {
+  // thickness is the Thickness of the wall
   let thickness = $("#OpaqueSld").val() * SCL;
+  // color is the Color of the Insulation
   let color = $("#insulation-color").val();
 
   //Drawing the Walls with color
   //OUTER WALL (BLUE)
-  let h1 = obj.height - 48 - 2;
+  // This (h1) value is used for next computation so it's a good idea to put it on a variable
+  let h1 = obj.height - 48 - 2; 
   ctx.beginPath();
   ctx.lineWidth = "2";
   ctx.strokeStyle = WALL_COLOR;
@@ -174,6 +221,7 @@ function drawPlan(obj, ctx) {
     obj.height - 48 - 4
   );
   //INNER WALL (BLUE)
+  // Values t1 and h2 are used on the next calculation so it's a good idea to put it on a variable
   let t1 = Number(thickness) + 1;
   let h2 = obj.height - 48 - t1 * 2;
   ctx.beginPath();
@@ -187,6 +235,7 @@ function drawPlan(obj, ctx) {
   );
   ctx.stroke();
   //INNER FILL 
+  // Value of t2 is used on the next calculation so it's a good idea to put it on a variable
   let t2 = t1 + 1;
   ctx.fillStyle = INSULATION_COLOR[0];
   ctx.fillRect(
@@ -282,6 +331,9 @@ function drawPlan(obj, ctx) {
   ctx.setLineDash([]);
 }
 
+/**
+ * Draws the Elevation View, calculations are done inside
+ */
 function drawElevation(obj, ctx) {
   let size = Math.trunc($("#windowAreaSld").val()) / 2.25 * 1.70 - 1;
 
@@ -351,6 +403,9 @@ function drawElevation(obj, ctx) {
   
 }
 
+/**
+ * Fills the Canvas with specified color
+ */
 function fillCanvas(obj, context, color){
   context.clearRect(0, 0, obj.width, obj.height);
   context.beginPath();
@@ -358,6 +413,9 @@ function fillCanvas(obj, context, color){
   context.fillRect(0, 0, obj.width, obj.height);
 }
 
+/**
+ * Draws the logo to the page
+ */
 function addLogo(context){
   context.font = "40px Georgia";
   context.strokeStyle = "blue";
@@ -367,56 +425,98 @@ function addLogo(context){
   context.strokeText("Xs",210, 50);
 }
 
+/**
+ * Calculates the Opaque Thermal Resistance using required values
+ * and put the result on the output.
+ */
 function calculateOpaqueThermalResistance(){
+  // opaqueConstruction is what's selected in the select option
   let opaqueConstruction = $("#insulation-color").val();
-  let opaqueThickness = $("#OpaqueInput").val();
+  // opaqueThickness is the value on the Opaque Thickness Output
+  let opaqueThickness = $("#opaqueOutput").val();
 
+  // The calculation
   var calc = 2 + (opaqueThickness - 2) * OPAQUE_CONSTRUCTION[opaqueConstruction];
 
-  $("#opaqueThermalOut").val(calc);
-  // Trigger the event
-  $("#opaqueThermalOut").change();
+  // Puts the calculation to the output
+  $("#opaqueThermalOutput").val(calc);
+  // Trigger the event for other calculations to occur
+  $("#opaqueThermalOutput").change();
 }
 
+/**
+ * Calculates the Effective Overall Thermal Resistance using required values
+ * and put the result to the output.
+ */
 function calculateEffectiveOverallThermalRes(){
-  let windowArea = $("#windowAreaInput").val();
-  let opaqueThermal = $("#opaqueThermalOut").val();
-  let windowThermal = $("#windowThermalResOut").val();
-  let doorThermal = $("#doorThermalOut").val();
+  // windowArea is the value on the Window Area Output
+  let windowArea = $("#windowAreaOutput").val();
+  // opaqueThermal is the value on the Opaque Thermal Output
+  let opaqueThermal = $("#opaqueThermalOutput").val();
+  // windowThermal is the value on the Window Thermal Resistance Output
+  let windowThermal = $("#windowThermalResOutput").val();
+  // doorThermal is the value on the Door Thermal Output
+  let doorThermal = $("#doorThermalOutput").val();
 
+  // The calculation
   var calc = 1 / ( ( (800 - windowArea)/opaqueThermal + windowArea/windowThermal + 20/doorThermal) / 820 );
-  $("#effectiveOverallThermalResOut").val(calc.toFixed(0));
-  // run the change event
-  $("#effectiveOverallThermalResOut").change();
+  // Put the value on the Effective Overall Thermal Resistance Output
+  $("#effectiveOverallThermalResOutput").val(calc.toFixed(0));
+  // Run the change event for other calculations to occur
+  $("#effectiveOverallThermalResOutput").change();
 }
 
+/**
+ * Calculates the Annual Energy using required values
+ * and put the result to the output.
+ */
 function calculateAnnualEnergy(){
+  // place is the value of selected option in the Places With Degree Days option
   let place = $("#placesWithDegreeDays").val()
 
+  // if the selection is the default one, clears the value on the output, and exit out of the function
   if(place == 0){
-    $("#annualEnergyOut").val("");
+    // Clears the value on the output
+    $("#annualEnergyOutput").val("");
+    // exit function
     return;
   }
 
-  let effectiveOverallThermaRes = $("#effectiveOverallThermalResOut").val();
-  if(effectiveOverallThermaRes == 0){
-    $("#annualEnergyOut").val("");
+  // effectiveOverallThermalRes is the value of the Overall Thermal Resistance Ouput
+  let effectiveOverallThermalRes = $("#effectiveOverallThermalResOutput").val();
+  // if the selection is the default one, clears the value on the output, and exit out of the function
+  if(effectiveOverallThermalRes == 0){
+    // Clears the value on the output
+    $("#annualEnergyOutput").val("");
+    // exit function
     return;
   }
 
-  var calc = ( 820 * DEGREE_DAYS[place] * 1.8 * 24 / effectiveOverallThermaRes ) / 3412 + DEGREE_DAYS[place] * 1.8 * 24 * 65 / 3412 + 3000;
+  // Do calcualation
+  var calc = ( 820 * DEGREE_DAYS[place] * 1.8 * 24 / effectiveOverallThermalRes ) / 3412 + DEGREE_DAYS[place] * 1.8 * 24 * 65 / 3412 + 3000;
 
-  $("#annualEnergyOut").val(Math.trunc(calc));
+  // Display the result on the Annual Energy Output
+  $("#annualEnergyOutput").val(Math.trunc(calc));
 }
 
+/**
+ * Shows the selected Concept and hides the other,
+ * or hides all concepts when the default is selected
+ */
 function  showConcept() {
+  // the value of the selected concept (index)
   let selected = $("#conceptSelect").val();
 
+  // loops through the array of IDs (global) and shows what matches the selection
   for(let i = 1; i < CONCEPTS.length; i++) {
+    // if the index matches the selection
     if(i == selected) {
+      // show the concept
       $("#"+CONCEPTS[i]).show();
+      // prevents the hide code to be not executed.
       continue;
     }
+    // hides the concept that does not match the selection
     $("#"+CONCEPTS[i]).hide();
   }
 }
