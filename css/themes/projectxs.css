@@ -56,6 +56,11 @@
   margin-left: 10px;
 }
 
+/* Under construction options for Chapters */
+.under-construction {
+  color: gray;
+}
+
 /* user defined id's                 */
 #planSldOutDiv,
 #windowSldOutDiv {

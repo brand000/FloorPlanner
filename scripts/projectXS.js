@@ -20,7 +20,8 @@ const OPAQUE_CONSTRUCTION = [0, 0, 0, 3, 3, 6];
 const DEGREE_DAYS = [1, 13030, 9980, 9000, 8170, 7100, 6440, 6050, 5670, 5500, 5000, 4800, 4670, 4520, 4460, 4300, 4000, 3500, 3400, 3000];
 // CONCEPTS array contains the element IDs of the concept divs in the html file, this is used for easier showing and hiding the elements
 const CONCEPTS = ["","localConditions", "annualEnergyBudget", "draftsAndVentiation", "insulationAndHeatloss", "materialsAndInsulation", "environmentalImpact"];
-
+// currentChapter is the currently selected Chapter from the option, this is used to help with the functionality when an unfinished chapter is selected.
+var currentChapter = "VIEW CHAPTERS";
 /**  
  * Loads everything needed for the page to work.
  */
@@ -118,10 +119,16 @@ function setup(){
     }
     // Register the select menu for CHAPTERS
     $("#chapter-option").on("change", function () {
+      // selectedOption is the selected option from the CHAPTERS VIEW select element
+      const selectedOption = $("#chapter-option").val();
       // Shows the Insulation plan
-      if ($("#chapter-option").val() == "Insulation") {
+      if ( selectedOption == "Insulation") {
+        // set the Global variable for other functions to use it
+        currentChapter = selectedOption;
         $("#insulation").show();
-      }else{
+      }else if (selectedOption == "VIEW CHAPTERS"){
+        // set the Global variable for other functions to use it
+        currentChapter = selectedOption;
         // Reloads the page
         location.reload();
       }
@@ -519,4 +526,22 @@ function  showConcept() {
     // hides the concept that does not match the selection
     $("#"+CONCEPTS[i]).hide();
   }
+}
+
+/**
+ * Shows an alert when an unfinished Chapters is selected
+ */
+function underConstruction() {
+  // optionValue is the value of the selected option from the CHAPTERS VIEW select element
+  const optionValue= $("#chapter-option").val();
+  // chapterOptionObj is the CHAPTERS VIEW select element object
+  const chapterOptionObj = $("#chapter-option");
+
+  // displays the error
+  alert(optionValue + " is under construction.");
+
+  // return the last selection to the element
+  chapterOptionObj.val(currentChapter);
+  // run change function for other functionality to occur
+  chapterOptionObj.change();
 }
