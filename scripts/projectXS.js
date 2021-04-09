@@ -20,8 +20,7 @@ const OPAQUE_CONSTRUCTION = [0, 0, 0, 3, 3, 6];
 const DEGREE_DAYS = [1, 13030, 9980, 9000, 8170, 7100, 6440, 6050, 5670, 5500, 5000, 4800, 4670, 4520, 4460, 4300, 4000, 3500, 3400, 3000];
 // CONCEPTS array contains the element IDs of the concept divs in the html file, this is used for easier showing and hiding the elements
 const CONCEPTS = ["","localConditions", "annualEnergyBudget", "draftsAndVentiation", "insulationAndHeatloss", "materialsAndInsulation", "environmentalImpact"];
-// currentChapter is the currently selected Chapter from the option, this is used to help with the functionality when an unfinished chapter is selected.
-var currentChapter = "VIEW CHAPTERS";
+
 /**  
  * Loads everything needed for the page to work.
  */
@@ -42,8 +41,8 @@ function setup(){
     $("#opaqueOutput").val(2);
     // Initialize Window Area output to 0
     $("#windowAreaOutput").val(0);
-    // Initialize the Opaque Thermal Output to 0
-    $("#opaqueThermalOutput").val(0);
+    // Initialize the Opaque Thermal Output to empty
+    $("#opaqueThermalOutput").val("");
     // Initialize the Door Thermal output to 2
     $("#doorThermalOutput").val(2);
     // Initialize the Window Thermal Resistance output to 1
@@ -91,17 +90,20 @@ function setup(){
     // Register the Window Thickness slider to the output
     $("#windowAreaSld").on("change", function () {
 
+        // Reflect the Window Area slider value to the output
+        $("#windowAreaOutput").val(($("#windowAreaSld").val() / 12 * 6.744).toFixed(1));
+        // Trigger the change event so that other calculations will be done
+        $("#windowAreaOutput").change();
+
+
         // Re-draw the Plan View when the slider is changed
         drawPlan(planObj, planViewContext);
 
         // Fill the Elevation Canvas and re-draw the Elevation View
         fillCanvas(elevationObj, elevationViewContext, ELEVATION_BACKGROUND)
         drawElevation(elevationObj, elevationViewContext);
-
-        // Reflect the Window Area slider value to the output
-        $("#windowAreaOutput").val(($("#windowAreaSld").val() / 12 * 6.744).toFixed(1));
-        // Trigger the change event so that other calculations will be done
-        $("#windowAreaOutput").change();
+  
+        
     });
 
     // Register the Opaque Construction select element to change the color when a selection is made
@@ -109,6 +111,10 @@ function setup(){
       // Redraw the Plan View
       drawPlan(planObj, planViewContext);
 
+      // DO NOT calculate Opaque Thermal Rsistance if "OPAQUE CONSTRUCTION WITH R or R/INCH" is selected
+      if ($("#insulation-color").val() == 0){
+        return;
+      }
       // Recalculate Opaque Thermal Resistance output
       calculateOpaqueThermalResistance();
     });
@@ -123,12 +129,8 @@ function setup(){
       const selectedOption = $("#chapter-option").val();
       // Shows the Insulation plan
       if ( selectedOption == "Insulation") {
-        // set the Global variable for other functions to use it
-        currentChapter = selectedOption;
         $("#insulation").show();
       }else if (selectedOption == "VIEW CHAPTERS"){
-        // set the Global variable for other functions to use it
-        currentChapter = selectedOption;
         // Reloads the page
         location.reload();
       }
@@ -152,8 +154,11 @@ function setup(){
 
     // Recalculate Overall Effective Thermal Resistance when Opaque Thermal Resistance output is changed
     $("#opaqueThermalOutput").change(function() {
-      // Recalculate Overall Effective Thermal Resistance
-      calculateEffectiveOverallThermalRes();
+      const opaqueThickness = $("#opaqueOutput").val();
+      if (opaqueThickness >= 4) {
+        // Recalculate Overall Effective Thermal Resistance
+        calculateEffectiveOverallThermalRes();
+      }
     });
     // Recalculate Overall Effective Thermal Resistance when Window Area output is changed
     $("#windowAreaOutput").change(function() {
@@ -306,6 +311,13 @@ function drawPlan(obj, ctx) {
   
   //Drawing the Window/Glass
   let size = Math.trunc($("#windowAreaSld").val()) / 2.25 * 2;
+
+
+  if( $("#windowAreaOutput").val() < 1.5 ) {
+    // DO NOT draw the window if the Window Area Output is < 1.5
+    size = 0;
+  }
+
   let x = (225 - size * SCL) / 2;
 
   if (size != 0) {
@@ -383,7 +395,8 @@ function drawElevation(obj, ctx) {
   ctx.stroke();
 
   //Drawing the Window
-  if (size > 0) {
+  // Only draw window if the Window Area is >= 1.5
+  if (size >= 1.5) {
     //OUTER LINE
     ctx.beginPath();
     ctx.lineWidth = "1";
@@ -483,9 +496,8 @@ function calculateAnnualEnergy(){
 
   // if the selection is the default one, clears the value on the output, and exit out of the function
   if(place == 0){
-    // Clears the value on the output
-    $("#annualEnergyOutput").val("");
-    // exit function
+
+    // exit function to avoid changing the output if the "PLACES WITH DEGREE DAYS" is selected
     return;
   }
 
@@ -540,8 +552,8 @@ function underConstruction() {
   // displays the error
   alert(optionValue + " is under construction.");
 
-  // return the last selection to the element
-  chapterOptionObj.val(currentChapter);
+  // return the value to VIEW CHAPTERS, this will reload the page after calling change()
+  chapterOptionObj.val("VIEW CHAPTERS");
   // run change function for other functionality to occur
   chapterOptionObj.change();
 }
