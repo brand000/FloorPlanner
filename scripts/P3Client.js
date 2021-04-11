@@ -21,6 +21,7 @@ const DEGREE_DAYS = [1, 13030, 9980, 9000, 8170, 7100, 6440, 6050, 5670, 5500, 5
 // CONCEPTS array contains the element IDs of the concept divs in the html file, this is used for easier showing and hiding the elements
 const CONCEPTS = ["","localConditions", "annualEnergyBudget", "draftsAndVentiation", "insulationAndHeatloss", "materialsAndInsulation", "environmentalImpact"];
 
+
 /**  
  * Loads everything needed for the page to work.
  */
@@ -122,6 +123,7 @@ function setup(){
     // Show the insulation plan if the page is reloaded while Insulation is selected
     if ($("#chapter-option").val() == "Insulation") {
       $("#insulation").show();
+      p3Client();
     }
     // Register the select menu for CHAPTERS
     $("#chapter-option").on("change", function () {
@@ -130,6 +132,7 @@ function setup(){
       // Shows the Insulation plan
       if ( selectedOption == "Insulation") {
         $("#insulation").show();
+        p3Client();
       }else if (selectedOption == "VIEW CHAPTERS"){
         // Reloads the page
         location.reload();
@@ -187,11 +190,6 @@ function setup(){
       // Recalculate Annual Energy
       calculateAnnualEnergy();
     });
-
-    // Hide the paragraphs for CONCEPT
-    for(let i = 0; i < CONCEPTS.length; i++) {
-      $("#"+CONCEPTS[i]).hide();
-    }
 
     // Show selected concept, this is useful when reloading the page
     showConcept();
@@ -522,18 +520,20 @@ function calculateAnnualEnergy(){
  * Shows the selected Concept and hides the other,
  * or hides all concepts when the default is selected
  */
-function  showConcept() {
+function  showConcept () {
   // the value of the selected concept (index)
   let selected = $("#conceptSelect").val();
 
   // loops through the array of IDs (global) and shows what matches the selection
   for(let i = 1; i < CONCEPTS.length; i++) {
     // if the index matches the selection
-    if(i == selected) {
+    if(i == selected && selected > 0) {
       // show the concept
       $("#"+CONCEPTS[i]).show();
       // prevents the hide code to be not executed.
       continue;
+    }else if (selected == 0){
+      continue
     }
     // hides the concept that does not match the selection
     $("#"+CONCEPTS[i]).hide();
@@ -557,3 +557,36 @@ function underConstruction() {
   // run change function for other functionality to occur
   chapterOptionObj.change();
 }
+
+
+/////////////////////////////////
+//P3Client
+////////////////////////////////
+
+
+function p3Client(){
+  const SERVER_URL = "http://127.0.0.1:5000/concepts"
+  // var SERVER_URL = "http://ugdev.cs.smu.ca:01090/concepts";
+   // jQuery http get function
+  //
+  // First argument : The complete URL (not just the root)
+  // Second argument: The callback function ("data" is a reference to the returned JSON object)
+  //                  The function is run only after .get() has finished and returned either
+  //                  a valid result or an error.
+  //
+  //                  On error, the .fail() function executes.
+  $.get(SERVER_URL, function (data) {
+
+    // append data to the end of the page
+    $('#ui-content').append(data.options);
+
+    // Hide the paragraphs for CONCEPT
+    for(let i = 0; i < CONCEPTS.length; i++) {
+      $("#"+CONCEPTS[i]).hide();
+    }
+
+  }).fail(function (error) {
+    alert(error.responseText);
+  });
+}
+
