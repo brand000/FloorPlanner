@@ -21,7 +21,8 @@ const DEGREE_DAYS = [1, 13030, 9980, 9000, 8170, 7100, 6440, 6050, 5670, 5500, 5
 // CONCEPTS array contains the element IDs of the concept divs in the html file, this is used for easier showing and hiding the elements
 const CONCEPTS = ["","localConditions", "annualEnergyBudget", "draftsAndVentiation", "insulationAndHeatloss", "materialsAndInsulation", "environmentalImpact"];
 
-
+// Url used to fetch data
+const SERVER_URL = "http://ugdev.cs.smu.ca:1090/concepts";
 /**  
  * Loads everything needed for the page to work.
  */
@@ -565,8 +566,6 @@ function underConstruction() {
 
 
 function p3Client(){
-  const SERVER_URL = "http://127.0.0.1:5000/concepts"
-  // var SERVER_URL = "http://ugdev.cs.smu.ca:01090/concepts";
    // jQuery http get function
   //
   // First argument : The complete URL (not just the root)
