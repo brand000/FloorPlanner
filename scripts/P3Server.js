@@ -30,7 +30,6 @@ var allowCrossDomain = function (req, res, next) {
 server.use(allowCrossDomain);
 
 server.get("/concepts", function (req, res) {
-    // const con = JSON.stringify(conceptJson)
   res.json(conceptJson);
 });
 
