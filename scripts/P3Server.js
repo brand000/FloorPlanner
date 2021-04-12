@@ -1,3 +1,9 @@
+/**
+ * projextXS.js
+ * Linked to index.html
+ * Author: Brandon Watson, Laurence Cortez, Fardin 
+ */
+
 const express = require('express');
 const conceptJson = require('./conceptjson');
 
