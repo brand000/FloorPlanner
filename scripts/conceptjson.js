@@ -1,3 +1,11 @@
+/**
+ * projextXS.js
+ * Linked to index.html
+ * Author: Brandon Watson, Laurence Cortez, Fardin 
+ */
+
+//json containingg the html for the options for the concept menu
+
 const conceptJson =  {options : '<div id="localConditions"> <br> Local Conditions: <br> <br>' +
                             "Heating demand is given in heating degree-days. The length of a Canadian heating season is the number of days below 18&deg;C. Coldness is the"+
                             "difference between  a desired indoor temperature of 20&deg;C and the average outdoor temperature on those days. <br> <br>"+
